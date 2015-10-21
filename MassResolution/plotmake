@@ -1,0 +1,21 @@
+
+ROOTLIBS = `/afs/atlas.umich.edu/opt/root/bin/root-config --libs`
+OPTCOMP  = `/afs/atlas.umich.edu/opt/root/bin/root-config --cflags`
+
+SPECIALFLAGS= --exceptions
+CFLAGS = -I. 
+LFLAGS =
+
+RCXX = $(CFLAGS) $(ROOTCFLAGS)
+DBG = -g -L -O
+CC = g++ ${DBG} $(RCXX) $(OPTCOMP) 
+
+all: run 
+
+run:  compPlots.cpp AtlasStyle.C
+	$(CC) compPlots.cpp AtlasStyle.C  $(ROOTLIBS) -o run_compPlots
+#run:  mcplots.cpp AtlasStyle.C
+#	$(CC) mcplots.cpp AtlasStyle.C  $(ROOTLIBS) -o run_mcplots
+
+clean:
+	\rm -f *.o
